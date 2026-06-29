@@ -22,17 +22,18 @@
 
 能由主公式现场推出的，标 `\ketui`（可推），**不让用户死背**。只有"记不住就丢分"的端点公式标 `\bibei`（必背）。这样把记忆负担压到最小。
 
-## 3. 七段结构（每章 PDF 固定顺序）
+## 3. 八段结构（每章 PDF 固定顺序）
 
 1. **一、本章公式记忆总览**：一两句主线/转换链 + 公式族概览（用阿拉伯数字 1 2 3）+ 三句口诀。
 2. **二、公式族卡片**：每族一个 `familybox`。
 3. **三、必背公式极简版**：红框，编号列出全部 `\bibei`。
-4. **四、默写空表**：`tabularx` 三列（# / 默写项 / 答案列 `\dotfill`）。
-5. **五、默写答案**：`\clearpage` **另起一页**（方便对折遮答案默写）；三列同空表，答案列用 `\af{公式}`/`\at{文字}`。
+4. **四、Self-test questions（英文）**：`tabularx` 两列（Question / Answer=`\dotfill`），**按公式族分组**，每族 3–5 题、覆盖四类题型（见 §5）。
+5. **五、Answers**：`\clearpage` **另起一页**；与第四节行项一一对应，答案列 `\af{公式}`/`\at{文字}`。
 6. **六、易混公式对照**：`tabularx` 三列（易混点 / 正确 / 常见错误）。
-7. **七、本章公式总账（速记）**：灰框，一句话回顾族/必背/易混/跨章关联。
+7. **七、Worked problems（作业 + PPT 例题 + 变体）**：每题一个 `probbox`，含 Problem / Solution / Variant（见 §7）。
+8. **八、本章公式总账（速记）**：灰框，一句话回顾族/必背/易混/跨章关联。
 
-> 七段全部入册。"下次怎么提示"那种会话用的内容**不入 PDF**。
+> 八段全部入册。"下次怎么提示"那种会话用的内容**不入 PDF**。
 
 ## 4. 公式族卡片解剖（familybox 内部）
 
@@ -64,11 +65,18 @@ Latin Modern 字体无此字形，xeCJK 不路由 → **显示成空白**（PDF 
 ### D. 双参数宏别误用单参数形式
 如 `\inner{x}{y}` 是双参数宏；若写成 `\inner{x}` 会把后续中文吞进 math 模式，报缺字形。用宏时参数个数要对。
 
-## 6. 默写空表 + 答案页怎么搭
+## 6. 英文多元提问（第四节空表 / 第五节答案）
 
-- **空表（四）**：`# | 默写项 | 答案列(\dotfill)`。默写项里行内空格用 `\underline{\hspace{1cm}}`。
-- **答案表（五）**：`\clearpage` 另起页，**行项与空表一一对应**，答案列填 `\af{公式}` 或 `\at{文字}`。
-- 默写项要覆盖所有 `\bibei` 必背公式 + 高频 `\ketui`。一般 14–22 行。
+- **语言**：提问一律**英文**（公式/符号仍用 LaTeX 数学）；答案可数学（语言中性）或短英文。
+- **分组**：按公式族分组，每族前用 `\famhdr{Family N · Name}`。
+- **四类题型**（每族 3–5 题，尽量覆盖多类），行首挂彩色标签宏：
+  - `\qF` **F=Formula**：默写主公式。
+  - `\qC` **C=Concept**：定义 / 性质 / 物理含义 / T-F 判断。
+  - `\qV` **V=Variant**：套到具体信号或情形（变式）。
+  - `\qD` **D=Derivation**：一步关键推导。
+- **空表（四）**：`tabularx` 两列 `p{11cm} X`（Question / Answer=`\dotfill`）；行内填空用 `\uf` 或 `\uf[1.5cm]`。
+- **答案表（五）**：`\clearpage` 另起页，**行项与空表一一对应**；答案列数学用 `\af{...}`、文字/判断用 `\at{...}`。
+- 覆盖全部 `\bibei` 必背 + 高频 `\ketui`；每族 3–5 题，全章约 15–25 题。
 
 ## 7. 跨章关联（不重复推导）
 
@@ -93,4 +101,19 @@ xelatex -interaction=nonstopmode notes.tex
 
 ## 9. 多章批量（并行）
 
-一章一个子代理，每个：读 `lecture-organizer-workspace/<ch>/detail.md` + 抄 `templates/formula-memory.tex` 导言区 → 填七段 → 编译自检。注意并发触发 MiKTeX lock 时 `sleep 6` 重试。已验证可一次性铺满全书（9 章实例见 `formula-memory-workspace/`）。
+一章一个子代理，每个：读 `lecture-organizer-workspace/<ch>/detail.md` + 抄 `templates/formula-memory.tex` 导言区 → 填八段 → 编译自检。注意并发触发 MiKTeX lock 时 `sleep 6` 重试。已验证可一次性铺满全书（9 章实例见 `formula-memory-workspace/`）。
+
+## 10. 大题演练（第七节：作业 HW + PPT 例题 EX + 变体）
+
+把"作业题"和"PPT 例题"都按统一流程整理：**英文题干 → 英文规范解答 → 变体及参考答案**。每题一个橙色 `probbox`，内含三段：
+
+- `\prob` **Problem**：英文题干，**逐字**取自作业题或 PPT 例题。
+- `\sol` **Solution**：英文规范解答，关键步骤不跳步。
+- `\var` **Variant**：基于该题自拟 1 个变体 + 参考答案（`\textbf{Ans:}` 给出）。
+
+要点：
+
+- 题目标题用 `HW N`（作业）或 `EX`（PPT/教材例题）前缀区分，如 `\probbox{HW 1 · <标题>}`、`\probbox{EX · <标题>}`。
+- **素材源**：作业题 + 规范解答 ← `detail.md` 的作业分析节（含「答案原文」，已是规范英文，逐字采用）；PPT 例题 ← `lecture-organizer-workspace/<ch>-render/pages/*.png`（视觉提取，文字层不可信，见 [[pdf-extraction-packaging-gotchas]]）。
+- **无配套作业的章节**（如 Ch13 / Ch15）：第七节只用 `EX`（PPT 例题）。
+- 作业覆盖范围：`homework01–08` 仅覆盖 **Ch1–5**（见 [[lecture-organizer-skill]] 的作业覆盖说明）；其余章节的作业匹配不准就停下问，绝不硬凑。
