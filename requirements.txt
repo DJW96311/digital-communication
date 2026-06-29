@@ -1,0 +1,10 @@
+# lecture-organizer Python dependencies.
+# Install into the skill venv (see SKILL.md "首次运行环境准备"):
+#   uv pip install --python .venv/Scripts/python.exe -r requirements.txt
+#
+# NOTE: pywin32 is Windows-only (used for PowerPoint COM -> PDF). On macOS/Linux
+# PPTX input is unsupported; feed PDF exports instead.
+pymupdf
+pywin32 ; platform_system == "Windows"
+python-pptx
+pillow

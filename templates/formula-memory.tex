@@ -1,0 +1,177 @@
+% ============================================================
+%  数字通信 · 公式记忆手册 —— 可复用模板（lecture-organizer 模式三）
+%  用法：复制本文件到 formula-memory-workspace/<章节>/notes.tex，
+%        保留导言区与所有 \newcommand，只替换正文。编译：xelatex notes.tex（两遍）。
+%  本文件本身可编译（smoke test），xelatex notes.tex 应得 0 错误 0 缺字形。
+% ============================================================
+\documentclass[11pt,a4paper]{ctexart}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+\usepackage{geometry}
+\geometry{a4paper, margin=1.8cm}
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=1.5em}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable, skins}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[colorlinks=true, linkcolor=blue!50!black,
+            urlcolor=blue!60!black, bookmarksopen=true]{hyperref}
+
+\setlength{\parskip}{3pt}
+\linespread{1.06}
+
+% ---------- 缩写宏（本章若需新符号，在下面追加 \newcommand）----------
+\newcommand{\xp}{x_{+}}
+\newcommand{\xl}{x_l}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\ihat}[1]{\widehat{#1}}
+\newcommand{\inner}[2]{\langle #1,#2\rangle}
+
+% ---------- 答案单元格强调（tabularx 安全：颜色，禁用 \bm/\boldsymbol）----------
+\newcommand{\af}[1]{\textcolor{blue!50!black}{\ensuremath{#1}}}
+\newcommand{\at}[1]{\textcolor{blue!50!black}{\textbf{#1}}}
+
+% ---------- 标签徽章（公式字段后挂）----------
+\newcommand{\bibei}{\colorbox{red!14}{\textcolor{red!70!black}{\,\scriptsize\bfseries\sffamily 必背\,}}}
+\newcommand{\ketui}{\colorbox{blue!14}{\textcolor{blue!55!black}{\,\scriptsize\bfseries\sffamily 可推\,}}}
+\newcommand{\gainian}{\colorbox{gray!18}{\textcolor{black!55}{\,\scriptsize\bfseries\sffamily 概念\,}}}
+
+% ---------- 文字段标签 ----------
+\newcommand{\fld}[2]{\par\noindent\textbf{#1}\quad #2\par\smallskip}
+
+% ---------- 章节大条 ----------
+\newcommand{\secbar}[1]{\par\addvspace{12pt}\noindent
+  \textcolor{blue!50!black}{\rule[-2pt]{5pt}{16pt}}\hspace{6pt}%
+  {\Large\bfseries\textcolor{blue!35!black}{#1}}\par
+  \addvspace{2pt}\noindent\textcolor{blue!20}{\rule{\linewidth}{0.6pt}}\par\addvspace{4pt}}
+
+% ---------- 公式族卡片 ----------
+\newtcolorbox{familybox}[1]{
+  enhanced, breakable, sharp corners,
+  colback=blue!1, colframe=blue!45!black, boxrule=0.5pt, leftrule=3pt,
+  title={\bfseries\sffamily #1}, fonttitle=\bfseries\sffamily,
+  colbacktitle=blue!55!black, coltitle=white,
+  left=8pt, right=8pt, top=5pt, bottom=5pt}
+
+\newcommand{\core}[1]{\par\noindent
+  {\textcolor{orange!75!black}{\textbf{$\bigstar$ 记忆核心}}}\quad\textit{#1}\par\smallskip}
+
+\begin{document}
+
+% ==================== 标题块（替换为本章） ====================
+\begin{center}
+{\Huge\bfseries\textcolor{blue!40!black}{数字通信 · 公式记忆手册}}\\[3pt]
+{\Large 第 X 章\ \S X.X\ \ <本章标题>}\\[2pt]
+{\small\textcolor{gray}{<关键词 1> \,$\cdot$\, <关键词 2> \,$\cdot$\, <关键词 3>}}
+\end{center}
+\vspace{2pt}
+\noindent\textcolor{blue!30}{\rule{\linewidth}{1.2pt}}
+
+% ==================== 一、总览 ====================
+\secbar{一、本章公式记忆总览}
+
+<一两句点出本章主线/转换链；列出公式族用普通阿拉伯数字 1 2 3（禁用圆圈数字）；
+给三句口诀。>
+
+% ==================== 二、公式族卡片（每族一个 familybox） ====================
+\secbar{二、公式族卡片}
+
+\begin{familybox}{公式族 1 · <族名>}
+\core{<一句话记忆核心：这条族用什么主公式串起来。>}
+\fld{主公式 \bibei}{<端点公式>}          % \bibei 必背 / \ketui 可推 / \gainian 概念
+\fld{推导链}{<主公式 $\Rightarrow$ 变形 $\Rightarrow$ 特殊情况>}
+\fld{常见结论 \bibei}{<关键结论>}
+\fld{易混点}{<本族最易记错处>}
+\end{familybox}
+
+% 长公式用 \boxed 居中：
+% \par\noindent\textbf{主公式}\ \bibei
+% \begin{equation*}\boxed{\;<公式>\;}\end{equation*}
+
+% ==================== 三、必背极简版（红框） ====================
+\begin{tcolorbox}[enhanced, breakable, sharp corners,
+  colback=red!2, colframe=red!55!black, boxrule=0.6pt,
+  title={\bfseries\sffamily 三、必背公式极简版},
+  colbacktitle=red!60!black, coltitle=white,
+  left=10pt, right=10pt, top=4pt, bottom=4pt]
+\renewcommand{\arraystretch}{1.45}
+\noindent\begin{tabularx}{\linewidth}{@{}>{\bfseries\color{red!60!black}}c X@{}}
+\toprule
+\rmfamily\color{black}\textbf{\#} & \textbf{必背公式} \\
+\midrule
+1 & <必背公式 1> \\
+2 & <必背公式 2> \\
+\bottomrule
+\end{tabularx}
+\end{tcolorbox}
+
+% ==================== 四、默写空表（答案列 \dotfill） ====================
+\secbar{四、默写空表（遮右栏默写）}
+
+\renewcommand{\arraystretch}{1.7}
+\noindent\begin{tabularx}{\linewidth}{@{}c p{7.8cm} X@{}}
+\toprule
+\textbf{\#} & \textbf{默写项} & \textbf{你的答案} \\
+\midrule
+1 & <默写项，行内空格用 \underline{\hspace{1cm}}> & \dotfill \\
+2 & <默写项> & \dotfill \\
+\bottomrule
+\end{tabularx}
+\renewcommand{\arraystretch}{1.0}
+
+% ==================== 五、默写答案（\clearpage 另起页；答案列 \af/\at） ====================
+\clearpage
+\secbar{五、默写答案（对答案用）}
+
+\renewcommand{\arraystretch}{1.6}
+\noindent\begin{tabularx}{\linewidth}{@{}c p{7.8cm} X@{}}
+\toprule
+\textbf{\#} & \textbf{默写项} & \textbf{答案} \\
+\midrule
+1 & <同空表默写项> & \af{X^{*}(f)} 或 \at{<文字答案>} \\
+2 & <同空表默写项> & \af{X^{*}(f)} \\
+\bottomrule
+\end{tabularx}
+\renewcommand{\arraystretch}{1.0}
+
+% ==================== 六、易混公式对照（三列） ====================
+\secbar{六、易混公式对照}
+
+\renewcommand{\arraystretch}{1.5}
+\noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{4.0cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{易混点} & \textbf{正确} & \textbf{常见错误} \\
+\midrule
+<易混点> & <正确> & <常见错误> \\
+\bottomrule
+\end{tabularx}
+\renewcommand{\arraystretch}{1.0}
+
+% ==================== 七、本章公式总账（灰框速记） ====================
+\begin{tcolorbox}[enhanced, breakable, sharp corners,
+  colback=gray!4, colframe=gray!55, boxrule=0.5pt,
+  title={\bfseries\sffamily 七、本章公式总账（速记）},
+  colbacktitle=gray!35!black, coltitle=white,
+  left=10pt, right=10pt, top=4pt, bottom=4pt]
+\textbf{章节}：<章名>\hfill\textbf{进度}：已完成
+
+\smallskip
+\textbf{已整理公式族}：1 <族1>\ 2 <族2>\ ...
+
+\smallskip
+\textbf{必背}：见第三节。\quad \textbf{可推}：<...>。
+
+\smallskip
+\textbf{易混}：<...>。
+
+\smallskip
+\textbf{与其他章节关联}：<点明是哪族延伸，不重复推导>。
+\end{tcolorbox}
+
+\vspace{6pt}
+\begin{center}\small\textcolor{gray}{数字通信公式记忆手册 \,$\cdot$\, <第 X 章> \,$\cdot$\, 供打印默写}\end{center}
+
+\end{document}

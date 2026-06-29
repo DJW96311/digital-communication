@@ -1,0 +1,49 @@
+% ============================================================
+%  最小编译自检模板 —— 用于验证 xelatex + ctex + 数学环境可用
+%  compile_pdf.py 会自动用真实内容替换，此文件仅供 smoke test
+% ============================================================
+\documentclass[11pt]{ctexart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems, breakable, skins}
+
+% --- 例题/概念/公式盒子的统一定义（compile_pdf.py 生成的文档会复用这套）---
+\newtcbtheorem[number within=section]{examplebox}{例题}{
+  colback=blue!4, colframe=blue!45!black, fonttitle=\bfseries,
+  breakable
+}{ex}
+\newtcbtheorem[number within=section]{conceptbox}{概念}{
+  colback=green!4, colframe=green!40!black, fonttitle=\bfseries,
+  breakable
+}{cpt}
+
+\title{编译自检 \\ Compilation Smoke Test}
+\author{lecture-organizer}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{中文与公式}
+本章覆盖\textbf{数字通信}（Digital Communications）中的关键概念，
+例如信噪比 SNR $= \frac{E_b}{N_0}$，以及误码率。
+
+\begin{equation}
+\text{BER} = Q\left(\sqrt{\frac{2E_b}{N_0}}\right)
+\end{equation}
+
+\begin{itemize}
+  \item 复数信号：$z = a + jb$，模 $|z| = \sqrt{a^2 + b^2}$
+  \item 傅里叶变换：$\displaystyle X(f) = \int_{-\infty}^{\infty} x(t)\,e^{-j2\pi ft}\,dt$
+\end{itemize}
+
+\section{例题}
+\begin{examplebox}{已知余弦信号的频谱}{cos-spectrum}
+已知 $x(t) = \cos(2\pi f_0 t)$，求其频谱 $X(f)$。
+\end{examplebox}
+
+\end{document}
